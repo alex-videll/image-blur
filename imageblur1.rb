@@ -6,9 +6,11 @@ class Image
 	def output_image
 		@image.each do |row|
 			puts row.join(" ")
-		end
 	end
 
+	def blur (row, column)
+		
+	end
 end
 
 	image = Image.new([
