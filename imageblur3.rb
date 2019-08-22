@@ -9,25 +9,30 @@ class Image
 		end
 	end
 
+	def manhattan_blur(distance = 1)
+		distance.times do
+			blur_image
+		end
+	end
+
 
 	def blur_image
 		blur_image = []
 		pixel = []
 		@image.each_with_index do |row, y|
 			@image.each_with_index do |col, x|
-				# puts "#{y}, #{x} = #{@image[y][x]}"
 				if @image[y][x] == 1
 					pixel << [y, x]
 				end
 			end
 		end
 
-		pixel.each do |p|
+		pixel.each_with_index do |p, i|
 			if p[0] > 0
 				@image[p[0]-1][p[1]] = 1
 			end
 
-			if p[0] < @image.length
+			if p[0] < @image.length - 1
 				@image[p[0]+1][p[1]] = 1
 			end
 
@@ -47,8 +52,9 @@ end
 		[0, 0, 0, 0],
 	  	[0, 1, 0, 0],
 	  	[0, 0, 0, 1],
-	  	[0, 0, 0, 0] 
+	  	[0, 0, 0, 0],
 	])
 
-	image.blur_image
+
+	image.manhattan_blur(2)
 	image.output_image
